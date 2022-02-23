@@ -1,9 +1,15 @@
 package org.johnwick182.resfulwebservice.user;
 
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.RepresentationModel;
+
+import javax.validation.constraints.Size;
 import java.util.Date;
 
-public class User {
+public class User extends RepresentationModel<User> {
     private Integer id;
+
+    @Size(min = 3, max = 20)
     private String name;
     private Date birthDate;
 
