@@ -1,5 +1,6 @@
 package org.johnwick182.resfulwebservice.user;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,13 +21,22 @@ public class UserDaoService {
         return users;
     }
 
-    public User save(User user) {
+    public void save(User user) {
         users.add(user);
-        return user;
     }
 
     public User findOne(int id) {
         return users.stream().filter(user1 -> user1.getId().equals(id)).findAny().orElse(null);
+    }
+
+    public ResponseEntity<User> delete(int id) {
+        if (users.removeIf(user -> user.getId() == id)) {
+            System.out.println("deleted");
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     //lesson 19

@@ -1,6 +1,7 @@
 package org.johnwick182.resfulwebservice.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class UserResource {
         return service.findAll();
     }
 
-    @GetMapping("/users/{id} ")
+    @GetMapping("/users/{id}")
     public User retrieveUser(@PathVariable int id) {
         return service.findOne(id);
     }
@@ -24,6 +25,11 @@ public class UserResource {
     @PostMapping("/users")
     public void createUser(@RequestBody User user) {
         service.save(user);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable int id) {
+        return service.delete(id);
     }
 
 
